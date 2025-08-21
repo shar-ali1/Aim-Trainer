@@ -25,3 +25,43 @@ Built with **JavaScript, HTML, and CSS**, featuring real-time clickable targets 
 1. Clone or download this repository.  
    ```bash
    git clone https://github.com/shar-ali1/aim-trainer.git
+Navigate into the project folder:
+
+bash
+Copy
+Edit
+cd aim-trainer
+Install dependencies (if any):
+
+bash
+Copy
+Edit
+npm install
+Open index.html in your browser.
+
+📂 Project Structure
+perl
+Copy
+Edit
+AimTrainerDesktop/
+├── index.html       # Main game page
+├── main.js          # Game logic and interactivity
+├── thock.mp3        # Click feedback sound
+├── package.json     # Dependencies
+├── package-lock.json
+└── node_modules/    # (ignored in GitHub)
+💡 Future Improvements
+Add a scoring system with accuracy % and reaction time tracking.
+
+Difficulty levels (smaller/faster circles).
+
+Leaderboard for high scores.
+
+Mobile-friendly UI.
+
+👤 Author
+Sharaheel Ali
+
+GitHub
+
+LinkedIn
