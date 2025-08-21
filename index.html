@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aim Trainer</title>
+
+    <!-- Load Brython -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/brython/3.10.5/brython.min.js"></script>
+
+    <script>
+        // Listen for "Esc" key to close the window (only in Electron)
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                window.close();
+            }
+        });
+    </script>
+</head>
+<body onload="brython()">
+
+    <!-- Click Sound -->
+    <audio id="clickSound">
+        <source src="thock.mp3" type="audio/mpeg">
+    </audio>
+
+    <script type="text/python">
+        from browser import document, html, window
+
+        WIDTH, HEIGHT = 800, 600
+        DOT_COUNT = 3  # 3 dots
+        DOT_RADIUS = 50  # Size 50
+
+        # Centered game container
+        container = html.DIV(style={
+            "width": f"{WIDTH}px",
+            "height": f"{HEIGHT}px",
+            "background": "#1e325a",
+            "position": "absolute",
+            "top": "50%",
+            "left": "50%",
+            "transform": "translate(-50%, -50%)"
+        })
+        document <= container
+
+        # Use JavaScript's Math.random() since Brython's random module is broken
+        def random_position():
+            return int(window.Math.random() * (WIDTH - DOT_RADIUS * 2)), int(window.Math.random() * (HEIGHT - DOT_RADIUS * 2))
+
+        def click_dot(event):
+            dot = event.target
+            x, y = random_position()
+            dot.style.left = f"{x}px"
+            dot.style.top = f"{y}px"
+
+            # Play the "thock" sound on click
+            window.document["clickSound"].play()
+
+        dots = []
+        for _ in range(DOT_COUNT):
+            x, y = random_position()
+            dot = html.DIV(
+                style={
+                    "width": f"{DOT_RADIUS * 2}px",
+                    "height": f"{DOT_RADIUS * 2}px",
+                    "background": "#6496ff",
+                    "border-radius": "50%",
+                    "position": "absolute",
+                    "left": f"{x}px",
+                    "top": f"{y}px",
+                }
+            )
+            dot.bind("click", click_dot)
+            dots.append(dot)
+            container <= dot
+    </script>
+</body>
+</html>
