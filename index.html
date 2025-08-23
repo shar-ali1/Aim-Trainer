@@ -30,6 +30,11 @@
         WIDTH, HEIGHT = 800, 600
         DOT_COUNT = 3  # 3 dots
         DOT_RADIUS = 50  # Size 50
+        
+        # User metrics
+        score = 0
+        scoreboard = html.DIV("Score: " + str(score), id="scoreboard")
+        document <= scoreboard
 
         # Centered game container
         container = html.DIV(style={
@@ -53,8 +58,15 @@
             dot.style.left = f"{x}px"
             dot.style.top = f"{y}px"
 
+            global score
+            score += 1
+            update_scoreboard();
+
             # Play the "thock" sound on click
             window.document["clickSound"].play()
+        
+        def update_scoreboard():
+            scoreboard.text = f"Score: {score}"
 
         dots = []
         for _ in range(DOT_COUNT):
